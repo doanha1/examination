@@ -12,16 +12,17 @@ public class examination : MonoBehaviour
 
     void Start()
     {
-        //Skeppet spawnar på en random position innanför skärmen när spelet startar.
+        //Skeppet spawnar på en random position innanför skärmen när spelet startar
         Vector3 position = new Vector3(Random.Range(-8f, 8f), Random.Range(-8f, 8f), 0);
         transform.position = position;
-        movespeed = Random.Range(1, 10);
 
+        //Randomisera hastigheten på skeppet i början av spelet
+        movespeed = Random.Range(1, 10);
     }
 
     void Update()
     {
-        //SKeppet åka framåt
+        //Skeppet åka framåt
         transform.Translate(movespeed * Time.deltaTime, 0, 0, Space.Self);
 
         //När man trycker på D så ska skeppet svänga höger och bli blått
@@ -31,7 +32,7 @@ public class examination : MonoBehaviour
             rend.color = Color.blue;
         }
 
-        //När man trycker på A så ska skeppet svänga vänster och bli grönt
+        //När man trycker på A så ska skeppet svänga vänster och bli grönt och svänga långsammare än åt höger.
         if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(0, 0, rotationspeed / 2 * Time.deltaTime);
