@@ -8,7 +8,6 @@ public class examination : MonoBehaviour
     public float movespeed = 5f;
     public float rotationspeed = 360f;
     public int Vector3;
-    public float timerText;
     public float number = 1;
 
     void Start()
@@ -43,16 +42,7 @@ public class examination : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
         {
             transform.Translate(-movespeed / 2 * Time.deltaTime, 0, 0, Space.Self);
-        }
-
-        //Timer printa ut värdet varje sekund
-        timerText = timerText + Time.deltaTime;
-
-        if (timerText >= number)
-        {
-            print(timerText);
-            number = number + 1;
-        }   
+        }  
 
         //När man trycker Spacebar så ska skeppet få en random färg
         if (Input.GetKey(KeyCode.Space))
