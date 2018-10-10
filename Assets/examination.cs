@@ -10,13 +10,13 @@ public class examination : MonoBehaviour
     public int Vector3;
     public float timerText;
     public float number = 1;
-    public int Vector2;
 
     void Start()
     {
         //Skeppet spawnar på en random position innanför skärmen när spelet startar.
-        Vector3 position = new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f), 0);
+        Vector3 position = new Vector3(Random.Range(-8f, 8f), Random.Range(-8f, 8f), 0);
         transform.position = position;
+        movespeed = Random.Range(1, 10);
 
     }
 
@@ -42,24 +42,40 @@ public class examination : MonoBehaviour
         //När man trycker på S så ska skeppet flyga hälften så snabbt och när man släpper S så ska farten bli samma igen
         if (Input.GetKey(KeyCode.S))
         {
-            transform.Translate(-movespeed /2 * Time.deltaTime, 0, 0, Space.Self);
+            transform.Translate(-movespeed / 2 * Time.deltaTime, 0, 0, Space.Self);
         }
-        
+
         //Timer printa ut värdet varje sekund
         timerText = timerText + Time.deltaTime;
 
-        if(timerText >= number)
+        if (timerText >= number)
         {
             print(timerText);
             number = number + 1;
-        }
+        }   
 
         //När man trycker Spacebar så ska skeppet få en random färg
         if (Input.GetKey(KeyCode.Space))
         {
             rend.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         }
-        
-    }
 
+        //Om skeppet åker ut ovanför så ska det komma tillbaka ner till på skärmen.
+        if (transform.position.x < -9.4f)
+        {
+            transform.position = new Vector3(9.4f, transform.position.y);
+        }
+        if (transform.position.x > 9.4f)
+        {
+            transform.position = new Vector3(-9.4f, transform.position.y);
+        }
+        if (transform.position.y < -5.4f)
+        {
+            transform.position = new Vector3(transform.position.x, 5.4f);
+        }
+        if (transform.position.y > 5.4f)
+        {
+            transform.position = new Vector3(transform.position.x, -5.4f);
+        }
+    }
 }
